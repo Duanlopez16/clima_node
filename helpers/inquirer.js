@@ -7,31 +7,15 @@ const menu_opts = [{
     name: 'opcion',
     message: '¿Que desea hacer?',
     choices: [{
-            value: '1',
-            name: `${'1.'.green} Crear tareas`
+            value: 1,
+            name: `${'1.'.green} Buscar ciudad.`
         },
         {
-            value: '2',
-            name: `${'2.'.green} Listar tareas`
+            value: 2,
+            name: `${'2.'.green} Historial`
         },
         {
-            value: '3',
-            name: `${'3.'.green} Listar tareas completadas`
-        },
-        {
-            value: '4',
-            name: `${'4.'.green} Listar tareas pendientes`
-        },
-        {
-            value: '5',
-            name: `${'5.'.green} Completar tareas`
-        },
-        {
-            value: '6',
-            name: `${'6.'.green} Borrar Tarea`
-        },
-        {
-            value: '0',
+            value: 0,
             name: `${'0.'.red } salir\n`
         }
     ]
@@ -74,24 +58,24 @@ const leer_input = async(message) => {
     return desc;
 }
 
-const listado_tareas_borrar = async(tareas = []) => {
-    if (tareas.length !== 0) {
-        const choices = tareas.map((tarea, key) => {
-            const name = `${key + 1}. ${tarea.desc}`;
+const listado_lugares = async(lugares = []) => {
+    if (lugares.length !== 0) {
+        const choices = lugares.map((lugar, key) => {
+            const name = `${key + 1}. ${lugar.name}`;
             return {
-                value: tarea.id,
+                value: lugar.id,
                 name
             }
         });
 
         choices.unshift({
-            value: '0.'.green,
-            name: 'Cancelar'
+            value: 0,
+            name: `0. Cancelar`.red
         });
         const preguntas = [{
             type: 'list',
             name: 'id',
-            message: 'borrar',
+            message: 'Seleccione lugar:',
             choices
         }];
 
@@ -138,7 +122,6 @@ export {
     inquirer_menu,
     inquirer_pausa,
     leer_input,
-    listado_tareas_borrar,
     confirmar,
-    listado_tareas_check_box
+    listado_lugares
 }
